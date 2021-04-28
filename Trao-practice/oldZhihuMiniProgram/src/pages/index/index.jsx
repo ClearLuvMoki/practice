@@ -1,44 +1,53 @@
+/**
+ * @author ClearLuvMoki
+ * @filename index.jsx
+ * @date 2021-04-28 星期三
+ * @description 主页
+ */
 import { Component } from 'react'
-import { connect } from 'react-redux'
-import { View, Button, Text } from '@tarojs/components'
-
-import { add, minus, asyncAdd } from '../../actions/counter'
-
+import { View, ScrollView } from '@tarojs/components'
+import { getNewsApi } from '../../utils/servers/homeApi/index' // 接口
 import './index.less'
 
-
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
 class Index extends Component {
-  componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+  constructor(props){
+    super(props)
+    this.state = {}
   }
 
-  componentWillUnmount () { }
+  componentDidMount = () => {
+    // this.initList()
+  }
 
-  componentDidShow () { }
-
-  componentDidHide () { }
+  /**
+   * @author ClearLuvMoki
+   * @filename index.jsx
+   * @date 2021-04-28 星期三
+   * @todo 获取数据列表
+   */
+  initList = () => {
+    getNewsApi().then(
+      (res) => {
+        console.log(res, 'res')
+      })
+  }
 
   render () {
+    const scrollTop = 0
+    const Threshold = 20
     return (
-      <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+      <View>
+        <ScrollView
+          scrollY
+          scrollWithAnimation
+          scrollTop={scrollTop} // 竖向滚动条位置
+          upperThreshold={Threshold}  // 具体顶部/左侧多少距离触发事件
+          lowerThreshold={Threshold}  // 具体底部/右侧多少距离触发事件
+          onScrollToUpper={() => {}} // 滚动到顶部/左侧触发事件
+          onScrollToLower={() => {}}// 滚动到底部/右侧触发事件
+        >
+
+        </ScrollView>
       </View>
     )
   }
