@@ -1,0 +1,83 @@
+#container {
+    width: 100%;
+    background: #ffffff;
+    margin: auto;
+    padding: 30px 30px 20px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 5px #eee;
+
+    .flex1 {
+      flex:1;
+    }
+    .flex8 {
+      flex:8;
+    }
+
+    // 顶部作者头像和标题
+    .title-container {
+      display: flex;
+      width: 90%;
+      height: 50px;
+      .author {
+        position: relative;
+        display: inline-block;
+
+        &_img{
+          display: inline-block;
+          width: 45px;
+          height: 45px;
+          border-radius: 45px;
+          top: 10px;
+          vertical-align: middle;
+        }
+      }
+      .author-name{
+        display: inline-block;
+        height: 45px;
+        line-height: 45px;
+        vertical-align: middle;
+        margin: 0 0 0 15px;
+        color: #a0acac;
+        font-size: 26px;
+      }
+      
+    }
+
+    // 消息内容
+    .content-container {
+      width: 94%;
+      margin-top: 10px;
+
+      // 问题题目
+      .question {
+        .question-link {
+          font-size: 28px;
+          font-weight: 600px;
+          line-height: 40px;
+        }
+      }
+      // 内容简述
+      .answer-body {
+        text-align: left;
+        margin-top: 15px;
+        font-size: 24px;
+        line-height: 28px;
+        color: #5b5b5b;
+      }
+    }
+
+    
+
+    // 底部赞同，评论，关注问题的样式
+    .answer-actions{
+        width: 100%;
+        padding: 10px 0  0;
+        color: #a0acac;
+  
+        view {
+          display: inline-block;
+          padding: 0 10px 0 0;
+          font-size: 24px;
+        }
+      }
+}

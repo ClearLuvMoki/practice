@@ -7,16 +7,19 @@
 import { Component } from 'react'
 import { View, ScrollView } from '@tarojs/components'
 import { getNewsApi } from '../../utils/servers/homeApi/index' // 接口
+import NewsCard from '../../components/NewsCard/index'
 import './index.less'
 
 class Index extends Component {
   constructor(props){
     super(props)
-    this.state = {}
+    this.state = {
+      newsList: []
+    }
   }
 
   componentDidMount = () => {
-    // this.initList()
+    this.initList()
   }
 
   /**
@@ -29,10 +32,12 @@ class Index extends Component {
     getNewsApi().then(
       (res) => {
         console.log(res, 'res')
+        this.setState({newsList: res?.data})
       })
   }
 
   render () {
+    const { newsList } = this.state
     const scrollTop = 0
     const Threshold = 20
     return (
@@ -46,7 +51,13 @@ class Index extends Component {
           onScrollToUpper={() => {}} // 滚动到顶部/左侧触发事件
           onScrollToLower={() => {}}// 滚动到底部/右侧触发事件
         >
-
+          {
+            newsList && newsList.length && newsList.map(item => {
+              return (
+                <NewsCard answerItem={item}/>
+              )
+            })
+          }
         </ScrollView>
       </View>
     )
