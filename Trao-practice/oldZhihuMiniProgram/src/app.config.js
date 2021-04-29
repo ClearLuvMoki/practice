@@ -5,9 +5,9 @@ export default {
   ],
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
+    navigationBarBackgroundColor: '#1B65CB',
+    navigationBarTitleText: '旧版知乎',
+    navigationBarTextStyle: 'white'
   },
   tabBar: {
     color: "#626567",

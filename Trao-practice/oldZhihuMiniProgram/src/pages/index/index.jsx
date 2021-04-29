@@ -5,9 +5,11 @@
  * @description 主页
  */
 import { Component } from 'react'
-import { View, ScrollView } from '@tarojs/components'
+import { View, ScrollView, Image, Input } from '@tarojs/components'
 import { getNewsApi } from '../../utils/servers/homeApi/index' // 接口
 import NewsCard from '../../components/NewsCard/index'
+import searchPng from '../../asset/images/search.png'
+import lightingPng from '../../asset/images/lighting.png'
 import './index.less'
 
 class Index extends Component {
@@ -31,7 +33,6 @@ class Index extends Component {
   initList = () => {
     getNewsApi().then(
       (res) => {
-        console.log(res, 'res')
         this.setState({newsList: res?.data})
       })
   }
@@ -42,6 +43,17 @@ class Index extends Component {
     const Threshold = 20
     return (
       <View>
+        <View className='search flex-wrp'>
+          <View className='search-left'>
+            <View className='flex-wrp'>
+              <View className='search-icon'><Image src={searchPng}></Image></View>
+              <View className='search-content'><Input type='text' placeholder={'搜索话题, 问题或人'} placeholderClass='search-placeholder' /></View>
+            </View>
+          </View>
+          <View className='search-right'>
+            <Image src={lightingPng}></Image>
+          </View>
+        </View>
         <ScrollView
           scrollY
           scrollWithAnimation
@@ -49,10 +61,10 @@ class Index extends Component {
           upperThreshold={Threshold}  // 具体顶部/左侧多少距离触发事件
           lowerThreshold={Threshold}  // 具体底部/右侧多少距离触发事件
           onScrollToUpper={() => {}} // 滚动到顶部/左侧触发事件
-          onScrollToLower={() => {}}// 滚动到底部/右侧触发事件
+          onScrollToLower={() => {}} // 滚动到底部/右侧触发事件
         >
           {
-            newsList && newsList.length && newsList.map(item => {
+            newsList && newsList.length > 0 && newsList.map(item => {
               return (
                 <NewsCard answerItem={item}/>
               )
