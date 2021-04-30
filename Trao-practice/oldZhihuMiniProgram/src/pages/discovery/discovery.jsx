@@ -6,28 +6,57 @@
  */
 import { Component } from 'react'
 import { View } from '@tarojs/components'
+import { getNewsTitleApi } from '../../utils/servers/discoveryApi/index'
+import './discovery.less'
 
 
 class DiscoverryIndex extends Component {
   constructor(props){
     super(props)
-    this.state = {}
+    this.state = {
+      navTab: ['新闻', '收藏'],
+      chooseNavTab: 0,
+    }
   }
 
-  componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+  componentDidMount = () => {
+    getNewsTitleApi()
   }
 
-  componentWillUnmount () { }
 
-  componentDidShow () { }
-
-  componentDidHide () { }
+  /**
+   * @author ClearLuvMoki
+   * @filename discovery.jsx
+   * @date 2021-04-30 星期五
+   * @todo 点击navTab
+   */
+  clickNavTab = (index) => {
+    this.setState({
+      chooseNavTab: index
+    })
+  }
 
   render () {
+    const { navTab, chooseNavTab, questionData } = this.state
     return (
-      <View>
-        111
+      <View id="discoveryStyles">
+        <View  className='toptab flex-wrp'>
+          {
+            navTab && navTab.map((item, index) => {
+              return (
+                <View 
+                  className={chooseNavTab === index ? 'toptab flex-item active' : 'toptab flex-item'}
+                  onClick={this.clickNavTab.bind(this, index)}
+                >
+                  {item}
+                </View>
+              )
+            })
+          }
+        </View>
+        <View className="random-container">
+
+        </View>
       </View>
     )
   }

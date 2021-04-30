@@ -7,7 +7,7 @@
 import { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { View, ScrollView, Image, Input } from '@tarojs/components'
-import { getNewsApi } from '../../utils/servers/homeApi/index' // 接口
+import { getListApi } from '../../utils/servers/homeApi/index' // 接口
 import NewsCard from '../../components/NewsCard/index'
 import searchPng from '../../asset/images/search.png'
 import lightingPng from '../../asset/images/lighting.png'
@@ -49,7 +49,7 @@ class Index extends Component {
    * @todo 获取数据列表
    */
   initList = () => {
-    getNewsApi(10, 0).then(
+    getListApi(10, 0).then(
       (res) => {
         this.setState({newsList: res?.data})
       })
@@ -64,7 +64,7 @@ class Index extends Component {
    getDataByOnScrollToLower = (event) => {
      console.log(event, 'event')
      const { newsList } = this.state
-      getNewsApi(10, newsList.length).then(
+      getListApi(10, newsList.length).then(
         (res) => {
           this.setState({newsList: this.state.newsList.concat(res?.data)})
       })
@@ -106,7 +106,15 @@ class Index extends Component {
           {
             newsList && newsList.length > 0 && newsList.map(item => {
               return (
-                <NewsCard answerItem={item}/>
+                <NewsCard 
+                  infoItem={item}
+                  title={item?.question?.title}
+                  authorName={item?.author?.name}
+                  authorHeadLine={item?.author?.headline}
+                  authorImg={item?.author?.avatar_url}
+                  excerpt={item?.excerpt}
+                  thankCount={item?.thanks_count}
+                />
               )
             })
           }

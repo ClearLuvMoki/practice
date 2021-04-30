@@ -8,38 +8,53 @@ import React, { Component } from 'react'
 import { View, Text, Image } from '@tarojs/components'
 import './index.less'
 
+
 export default class NewsCard extends Component {
     constructor(props){
         super(props)
         this.state = {}
     }
 
-
+    /**
+     * @author ClearLuvMoki
+     * @filename index.jsx
+     * @date 2021-04-30 星期五
+     * @props {
+     * 这里没用ts感觉亏死了
+     * infoItem 这里是传进来的消息对象
+     * title 标题
+     * authorName 作者名字
+     * authorImg 作者头像
+     * authorHeadLine 作者个签
+     * excerpt 消息的简述
+     * thankCount 点赞个数
+     * }
+     */
     render() {
-        const { answerItem } = this.props
+        const { infoItem, title, authorName, authorImg, authorHeadLine, excerpt, thankCount } = this.props
         return (
             <View id="container">
                 <View className="title-container">
                     <view className="author flex1">
-                        <Image className="author_img" src={answerItem?.author?.avatar_url}></Image>
+                        <Image className="author_img" src={authorImg}></Image>
                     </view>
                     <view className="flex8">
-                        <Text className="author-name">{answerItem?.author?.name}</Text>
+                        <Text className="author-name">{authorName}</Text>
                     </view>
                 </View>
                 <View className="content-container">
                     <View className='question'>
                         <View className='question-link'>
-                            <Text>{answerItem?.question?.title}</Text>
+                            <Text>{title}</Text>
                         </View>
                     </View>
                     <View className='answer-body'>
                         <View>
-                            <Text>{answerItem?.excerpt}</Text>
+                            <Text>{excerpt}</Text>
                         </View>
                         <View className='answer-actions'>
                             <View>
-                                <View>{answerItem?.thanks_count} 赞同 </View>
+                                <View>{thankCount} 赞同 </View>
                             </View>
                             <View >
                                 <View>{Math.ceil(Math.random()*100)} 评论 </View>

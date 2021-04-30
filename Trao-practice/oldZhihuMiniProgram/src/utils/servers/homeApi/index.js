@@ -14,7 +14,7 @@ import Taro from '@tarojs/taro'
  * @param { limit } 条数
  * @param { offset } 开始位置
  */
-const getNewsApi = async (limit, offset) => {
+const getListApi = async (limit, offset) => {
     Taro.showLoading({title: '加载中'})
     let resData = {}
     await Taro.request({
@@ -35,4 +35,4 @@ const getNewsApi = async (limit, offset) => {
     )
     return resData
 }
-export { getNewsApi }
+export { getListApi }
