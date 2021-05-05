@@ -5,7 +5,7 @@
  * @description 分享
  */
 import { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import { getNewsTitleApi } from '../../utils/servers/discoveryApi/index'
 import './discovery.less'
 
@@ -37,7 +37,8 @@ class DiscoverryIndex extends Component {
   }
 
   render () {
-    const { navTab, chooseNavTab, questionData } = this.state
+    const { navTab, chooseNavTab } = this.state
+    console.log(chooseNavTab, 'chooseNavTab')
     return (
       <View id="discoveryStyles">
         <View  className='toptab flex-wrp'>
@@ -46,7 +47,7 @@ class DiscoverryIndex extends Component {
               return (
                 <View 
                   className={chooseNavTab === index ? 'toptab flex-item active' : 'toptab flex-item'}
-                  onClick={this.clickNavTab.bind(this, index)}
+                  onClick={() => this.clickNavTab(index)}
                 >
                   {item}
                 </View>
@@ -54,8 +55,11 @@ class DiscoverryIndex extends Component {
             })
           }
         </View>
-        <View className="random-container">
-
+        <View>
+          <Text>新闻</Text>
+        </View>
+        <View>
+          <Text>收藏</Text>
         </View>
       </View>
     )
