@@ -35,12 +35,12 @@ export default class NewsCard extends Component {
         return (
             <View id="container">
                 <View className="title-container">
-                    <view className="author flex1">
+                    <View className="author flex1">
                         <Image className="author_img" src={authorImg}></Image>
-                    </view>
-                    <view className="flex8">
+                    </View>
+                    <View className="flex8">
                         <Text className="author-name">{authorName}</Text>
-                    </view>
+                    </View>
                 </View>
                 <View className="content-container">
                     <View className='question'>

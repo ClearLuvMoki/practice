@@ -5,7 +5,7 @@
  * @description 今日热点新闻
  */
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View, Image, Text } from '@tarojs/components'
 import './index.less'
 
 export default class HotNewsCard extends Component {
@@ -15,9 +15,14 @@ export default class HotNewsCard extends Component {
     }
     
     render() {
+        const { infoItem, title, image, anthor } = this.props
         return (
-            <View>
-                
+            <View id="HotNewsCardItem">
+                <View className="content">
+                    <View className="title">{title}</View>
+                    <View className="image"><Image  className="imageContent" src={image}></Image></View>
+                </View>
+                <View className="anthor">{anthor}</View>
             </View>
         )
     }

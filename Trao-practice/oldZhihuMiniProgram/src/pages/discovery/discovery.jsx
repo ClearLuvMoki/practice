@@ -5,8 +5,9 @@
  * @description 分享
  */
 import { Component } from 'react'
-import { View, Text } from '@tarojs/components'
+import { View, Text, ScrollView } from '@tarojs/components'
 import { getNewsTitleApi } from '../../utils/servers/discoveryApi/index'
+import HotNewsCard from '../../components/HotNews/index'
 import './discovery.less'
 
 
@@ -16,11 +17,27 @@ class DiscoverryIndex extends Component {
     this.state = {
       navTab: ['新闻', '收藏'],
       chooseNavTab: 0,
+      newsList: []
     }
   }
 
   componentDidMount = () => {
-    getNewsTitleApi()
+    this.initHotNews()
+  }
+
+  /**
+   * @author ClearLuvMoki
+   * @filename discovery.jsx
+   * @date 2021-05-06 星期四
+   * @todo 获取今日新闻
+   */
+  initHotNews = () => {
+    getNewsTitleApi().then(
+      (res) => {
+        console.log(res, 'res')
+        this.setState({newsList: res?.stories})
+      }
+    )
   }
 
 
@@ -33,12 +50,19 @@ class DiscoverryIndex extends Component {
   clickNavTab = (index) => {
     this.setState({
       chooseNavTab: index
+    }, () => {
+      switch (thi.state.chooseNavTab) {
+        case 0:
+          this.initHotNews()
+          break;
+        default:
+          break;
+      }
     })
   }
 
   render () {
-    const { navTab, chooseNavTab } = this.state
-    console.log(chooseNavTab, 'chooseNavTab')
+    const { navTab, chooseNavTab, newsList } = this.state
     return (
       <View id="discoveryStyles">
         <View  className='toptab flex-wrp'>
@@ -55,12 +79,29 @@ class DiscoverryIndex extends Component {
             })
           }
         </View>
-        <View>
-          <Text>新闻</Text>
-        </View>
-        <View>
-          <Text>收藏</Text>
-        </View>
+        {
+          chooseNavTab*1 === 0 && (
+            <View className="flexCard">
+              {
+                newsList && newsList.map(item => (
+                  <HotNewsCard
+                    infoItem={item}
+                    title={item?.title}
+                    image={item?.images[0]}
+                    anthor={item?.hint}
+                  />
+                ))
+              }
+            </View>
+          )
+        }
+       {
+         chooseNavTab*1 === 1 && (
+          <View hidden={false}>
+            <Text>收藏</Text>
+          </View>
+         )
+       }
       </View>
     )
   }

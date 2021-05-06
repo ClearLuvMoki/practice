@@ -44,12 +44,10 @@
         method: 'GET',
     }).then(
         (res) => {
-            console.log(res, 'res')
             Taro.hideLoading()
-            // if (res?.statusCode*1 === 200) {
-            //    resData = res?.data
-            // }
-            
+            if (res?.statusCode*1 === 200) {
+               resData = res?.data
+            }
         }
     )
     return resData
