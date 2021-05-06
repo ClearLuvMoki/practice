@@ -48,10 +48,11 @@ class DiscoverryIndex extends Component {
    * @todo 点击navTab
    */
   clickNavTab = (index) => {
+    console.log(index, 'index')
     this.setState({
       chooseNavTab: index
     }, () => {
-      switch (thi.state.chooseNavTab) {
+      switch (this.state.chooseNavTab) {
         case 0:
           this.initHotNews()
           break;
